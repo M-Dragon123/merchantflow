@@ -1,0 +1,12 @@
+# 统一行尾：文本文件一律 LF（Windows/Mac/Linux 协作无换行噪音）
+* text=auto eol=lf
+
+# 二进制文件不进行换行转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.jar binary
+*.zip binary
+*.pdf binary

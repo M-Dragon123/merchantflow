@@ -1,0 +1,51 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-merchantflow}
+      MYSQL_USER: ${MYSQL_USER:-merchantflow}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-merchantflow_dev_password}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_dev_password}
+      # 统一时区：保证 NOW()/CURRENT_TIMESTAMP 与业务（Asia/Shanghai）一致，避免"今日订单"跨时区偏差
+      TZ: Asia/Shanghai
+    command: --default-time-zone=+08:00
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD:-root_dev_password}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-merchantflow}
+      DB_USERNAME: ${MYSQL_USER:-merchantflow}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-merchantflow_dev_password}
+      JWT_SECRET: ${JWT_SECRET:-replace-with-a-32-character-minimum-development-secret}
+      TZ: Asia/Shanghai
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql-data:

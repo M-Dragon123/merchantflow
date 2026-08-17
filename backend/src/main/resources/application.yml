@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: merchantflow-api
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:merchantflow}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: ${DB_USERNAME:merchantflow}
+    password: ${DB_PASSWORD:merchantflow_dev_password}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+server:
+  port: 8080
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+merchantflow:
+  security:
+    jwt-secret: ${JWT_SECRET:replace-with-a-32-character-minimum-development-secret}

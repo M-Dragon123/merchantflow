@@ -1,0 +1,12 @@
+node_modules/
+dist/
+target/
+.env
+.idea/
+*.iml
+.tools/
+.DS_Store
+.vscode/
+*.log
+npm-debug.log*
+
