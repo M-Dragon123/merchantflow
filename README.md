@@ -22,6 +22,40 @@ AI 运营助手提出补货建议，用户确认后走标准入库流程
 
 项目内置 4 类演示角色、演示商品、客户和近 30 天历史订单。启动后即可体验工作台趋势、热销排行、待发货、库存预警和订单全流程。
 
+## 真实页面截图
+
+以下截图均来自仓库内置演示数据的本地运行环境。
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="docs/images/dashboard.png" alt="MerchantFlow 工作台" /><br />
+      <sub>工作台：趋势、热销排行与异常订单提醒</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="docs/images/inventory.png" alt="MerchantFlow 库存中心" /><br />
+      <sub>库存中心：快照、预警与可追溯流水</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="docs/images/products.png" alt="MerchantFlow 商品与 SKU" /><br />
+      <sub>商品与 SKU：售价、成本、安全库存与上下架</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="docs/images/ai-assistant.png" alt="MerchantFlow AI 运营助手" /><br />
+      <sub>AI 运营助手：只读查询与补货建议边界</sub>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="docs/images/warehouse-mobile.png" alt="MerchantFlow 手机仓库待处理页" width="28%" />
+  <img src="docs/images/orders-mobile-detail.png" alt="MerchantFlow 手机订单详情与操作记录" width="28%" />
+</p>
+
+<p align="center"><sub>手机仓库模式：扫码 / 手输查单、待发货处理、订单详情与操作记录</sub></p>
+
 ## 页面与功能展示
 
 | 页面 / 路由 | 可以看到什么 | 对应业务价值 |
