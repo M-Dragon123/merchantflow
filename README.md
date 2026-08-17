@@ -47,6 +47,12 @@
 
 库存变动采用带条件的原子更新：只有在 `available_qty + delta >= 0` 时才更新库存并递增版本号。若受影响行数不是 1，事务会失败并返回冲突错误；成功变更后，在同一事务内写入库存流水。因此并发请求不能将可用库存扣减为负数。
 
+## 阶段 4：订单接口
+
+- `GET/POST /api/v1/orders`：筛选订单或创建待付款订单；创建时锁定库存。
+- `POST /api/v1/orders/{id}/pay`：模拟确认付款，消耗锁定库存并写出库流水。
+- `POST /api/v1/orders/{id}/ship`、`/complete`、`/cancel`、`/refund`、`/refund/complete`：受服务端状态机和角色共同控制的生命周期操作。
+
 ## 阶段 5：工作台与报表
 
 - `GET /api/v1/dashboard/summary`：今日订单数、今日销售额、待发货数、库存预警数。
@@ -118,9 +124,3 @@ wsl --set-default-version 2
 ```
 
 不依赖 Docker 的本地开发仍可用：`scripts/setup-mysql-portable.ps1`（便携 MySQL）+ `scripts/dev-backend.ps1`（便携 JDK/Maven）。
-
-## 阶段 4：订单接口
-
-- `GET/POST /api/v1/orders`：筛选订单或创建待付款订单；创建时锁定库存。
-- `POST /api/v1/orders/{id}/pay`：模拟确认付款，消耗锁定库存并写出库流水。
-- `POST /api/v1/orders/{id}/ship`、`/complete`、`/cancel`、`/refund`、`/refund/complete`：受服务端状态机和角色共同控制的生命周期操作。
