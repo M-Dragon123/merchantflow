@@ -24,37 +24,44 @@ AI 运营助手提出补货建议，用户确认后走标准入库流程
 
 ## 真实页面截图
 
-以下截图均来自仓库内置演示数据的本地运行环境。
+以下截图均来自仓库内置演示数据的本地运行环境；点击图片可查看原图。
 
-<table>
-  <tr>
-    <td width="50%" align="center">
-      <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/dashboard.png" alt="MerchantFlow 工作台" /><br />
-      <sub>工作台：趋势、热销排行与异常订单提醒</sub>
-    </td>
-    <td width="50%" align="center">
-      <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/inventory.png" alt="MerchantFlow 库存中心" /><br />
-      <sub>库存中心：快照、预警与可追溯流水</sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/products.png" alt="MerchantFlow 商品与 SKU" /><br />
-      <sub>商品与 SKU：售价、成本、安全库存与上下架</sub>
-    </td>
-    <td width="50%" align="center">
-      <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/ai-assistant.png" alt="MerchantFlow AI 运营助手" /><br />
-      <sub>AI 运营助手：只读查询与补货建议边界</sub>
-    </td>
-  </tr>
-</table>
+### 工作台 · 经营概览
+
+<a href="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/dashboard.png">
+  <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/dashboard.png" alt="MerchantFlow 工作台：销售趋势、热销排行与异常订单提醒" width="100%" />
+</a>
+
+<sub>销售趋势、热销 Top10、异常订单提醒与待发货概览。</sub>
+
+### 库存中心 · 预警与可追溯流水
+
+<a href="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/inventory.png">
+  <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/inventory.png" alt="MerchantFlow 库存中心：快照、预警与可追溯流水" width="100%" />
+</a>
+
+<sub>库存快照、安全库存预警与变更流水，便于追溯每一次库存调整。</sub>
+
+### AI 运营助手 · 受控业务查询
+
+<a href="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/ai-assistant.png">
+  <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/ai-assistant.png" alt="MerchantFlow AI 运营助手：只读查询与补货建议边界" width="100%" />
+</a>
+
+<sub>运营问题路由至只读业务查询；涉及库存变更时，仍须在标准业务流程中确认。</sub>
+
+### 手机仓库模式 · 待处理与订单详情
 
 <p align="center">
-  <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/warehouse-mobile.png" alt="MerchantFlow 手机仓库待处理页" width="28%" />
-  <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/orders-mobile-detail.png" alt="MerchantFlow 手机订单详情与操作记录" width="28%" />
+  <a href="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/warehouse-mobile.png">
+    <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/warehouse-mobile.png" alt="MerchantFlow 手机仓库待处理页" width="42%" />
+  </a>
+  <a href="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/orders-mobile-detail.png">
+    <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/orders-mobile-detail.png" alt="MerchantFlow 手机订单详情与操作记录" width="42%" />
+  </a>
 </p>
 
-<p align="center"><sub>手机仓库模式：扫码 / 手输查单、待发货处理、订单详情与操作记录</sub></p>
+<p align="center"><sub>扫码 / 手输查单、待发货处理、订单详情与操作记录。</sub></p>
 
 ## 页面与功能展示
 
