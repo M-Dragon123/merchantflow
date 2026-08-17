@@ -17,9 +17,9 @@
 | M6 移动端仓库模式 | 待处理/订单/库存/我的四 Tab、扫码入口、大按钮 | ✅ 已实现 | `WarehouseShell` 底部四 Tab、`warehouse/` 四页、`ScanInput`、AppShell 移动端导航切换、路由 `/m/*` |
 | M7 管理后台 | 员工/角色管理、客户管理、库存盘点、商品编辑完善 | ✅ 已实现 | `stocktake/` 模块 + V7 迁移、`UserController`、`CustomerController`、商品 PUT、`UsersView`/`CustomersView`/`StocktakeView`、商品页新建/编辑 |
 | M8 PWA 与部署收尾 | PWA 图标与安装验证、空/错/加载态巡检、Docker 全链路验证 | ✅ 已实现（Docker 全链路需本机修复 WSL 后执行） | PWA 图标 + manifest、vite 分包、404 页、V8 演示数据、`verify-m5/m7` 脚本、部署说明 |
-| 阶段 2 AI 助手 | 受限工具查询 + 建议 + 二次确认 | ⬜ 未开始 | 预留 |
+| 阶段 2 AI 助手 | 受限工具查询 + 建议 + 二次确认 | ✅ 已实现 | `assistant/` 模块（IntentRouter + Provider 接口 + 规则引擎实现）、`AssistantView` 对话页、只读工具集 + 补货建议二次确认 |
 
-**环境事实**：`node v24.19.0` ✅、`frontend/node_modules` 已安装 ✅；**本机未安装 Java 21 与 Maven**（`backend/target` 不存在，后端从未编译过）；Docker 命令在当前会话被沙箱拦截，需授权后使用。
+**环境事实**：`node v24.19.0` ✅、`frontend/node_modules` 已安装 ✅、`npm run lint` ✅、`npm run build` ✅；本机未全局安装 JDK/Maven，但仓库内置便携工具链（`.tools/jdk` 21.0.12、`.tools/maven` 3.9.11）可直接编译并已跑通 `mvn test`（11 个用例全绿）；Docker 命令在当前会话被沙箱拦截，需授权后使用。
 
 ---
 
@@ -51,7 +51,7 @@ merchantflow/
 │       │   └── assistant/     （阶段 2）AI 助手
 │       ├── main/resources/
 │       │   ├── application.yml / application-docker.yml
-│       │   └── db/migration/  V1..V5 现有 + V6..（规划）
+│       │   └── db/migration/  V1..V8 现有迁移 + 阶段 2（无新增表）
 │       └── test/java/...
 ├── frontend/
 │   ├── package.json  vite.config.ts  eslint.config.ts  .prettierrc.json
@@ -202,9 +202,9 @@ erDiagram
 | customer | 客户 | name、mobile UK | 已建；运营维护 |
 | sales_order / sales_order_item | 订单与明细 | order_no UK、status、total_amount、version、paid_at(规划) | 已建；明细含价格快照 |
 | order_operation_log | 订单操作日志 | action、from/to_status、remark、operator_name | 已建 |
-| stocktake / stocktake_item | 盘点单与明细（规划） | stocktake_no、system_qty、counted_qty、diff_qty | 规划 V6 迁移 |
+| stocktake / stocktake_item | 盘点单与明细 | stocktake_no、system_qty、counted_qty、diff_qty | 已建（V7 迁移）；完成盘点差异自动生成 ADJUSTMENT 流水 |
 
-**规划迁移**：`V6__dashboard_and_stocktake.sql` —— ① `sales_order` 增加 `paid_at DATETIME NULL`（销售额按付款时间口径，见设计决策 7.4）；② 新建 `stocktake`、`stocktake_item` 两张表。
+**现有迁移**：`V1__initial_schema.sql`（用户/角色/分类/SPU/SKU/库存/客户）、`V2`/`V3`（演示数据与角色账号）、`V4__inventory_transactions.sql`、`V5__orders.sql`、`V6__paid_at.sql`（`sales_order.paid_at`，销售额按付款时间口径，见设计决策 7.4）、`V7__stocktake.sql`（盘点单与明细）、`V8__demo_catalog.sql`（演示商品/客户/近 30 天历史订单）。
 
 ---
 
@@ -260,7 +260,7 @@ erDiagram
 | GET /api/v1/dashboard/top-products?days=30 | 热销商品 Top10（已支付订单销量） |
 | GET /api/v1/dashboard/anomalies | 异常订单提醒（待付款超 24h、退款中） |
 
-### 客户 / 员工（规划）
+### 客户 / 员工（✅ M7 实现）
 | 方法/路径 | 说明 | 权限 |
 |---|---|---|
 | GET /api/v1/customers?keyword=&page= | 客户列表（分页搜索） | A/O |
@@ -269,7 +269,7 @@ erDiagram
 | PUT /api/v1/users/{id}/status | 启用/停用员工 | A |
 | PUT /api/v1/users/{id}/roles | 调整员工角色 | A |
 
-### AI 运营助手（阶段 2，规划）
+### AI 运营助手（✅ 阶段 2 实现）
 | 方法/路径 | 说明 | 权限 |
 |---|---|---|
 | POST /api/v1/assistant/chat | 自然语言问答，仅只读工具集，返回建议；库存调整必须走 `/inventory/adjustments` 并二次确认 | A/O |
@@ -282,14 +282,14 @@ erDiagram
 | 页面 | 路由 | 权限 | 状态 |
 |---|---|---|---|
 | 登录 | /login | 公开 | ✅ |
-| 工作台 | / | 全部 | ⬜ 占位 → M5 实现 |
-| 商品管理（SPU/SKU/分类） | /products | A/O/W(读) | ✅ 基础 → M7 完善 |
-| 库存中心（快照/预警/流水/盘点） | /inventory | A/O/W | ✅ 基础 → M7 加盘点 |
-| 订单管理（列表/筛选/创建/详情） | /orders | 全部（写按角色） | ✅ 基础 → M5 完善 |
-| 客户管理 | /customers | A/O | 规划 |
-| 员工管理 | /users | A | 规划 |
-| AI 运营助手 | /assistant | A/O | 阶段 2 |
-| 403 无权限 / 404 | /forbidden | — | ✅ 403，404 规划 |
+| 工作台 | / | 全部 | ✅ |
+| 商品管理（SPU/SKU/分类） | /products | A/O/W(读) | ✅ |
+| 库存中心（快照/预警/流水/盘点） | /inventory | A/O/W | ✅ |
+| 订单管理（列表/筛选/创建/详情） | /orders | 全部（写按角色） | ✅ |
+| 客户管理 | /customers | A/O | ✅ |
+| 员工管理 | /users | A | ✅ |
+| AI 运营助手 | /assistant | A/O | ✅ 阶段 2 |
+| 403 无权限 / 404 | /forbidden | — | ✅ |
 
 ### 移动端仓库模式（WarehouseShell：底部四 Tab，断点 <760px 自动启用；PC 可手动切换）
 | Tab | 内容 | 权限 |
@@ -312,7 +312,7 @@ erDiagram
 5. **库存调整规则**：reason 必填；出库不得将可用库存扣成负数；调整记录 before/after 与操作人。
 6. **销售额口径（规划）**：以 `paid_at` 为准统计已支付订单（排除已退款），趋势按日聚合。
 7. **异常订单（规划）**：待付款超过 24 小时 + 退款中订单，工作台提醒。
-8. **盘点（规划）**：仓库员创建盘点单，记录账面数与实点数，完成时差异自动生成 ADJUSTMENT 流水并记录操作人。
+8. **盘点（已实现）**：仓库员创建盘点单，记录账面数与实点数，完成时差异自动生成 ADJUSTMENT 流水并记录操作人。
 9. **AI 助手（阶段 2）**：只读工具集（库存预警、销量、销售排行），不提供写库工具；任何库存调整建议必须由用户二次确认，走现有 `/inventory/adjustments` 并落操作日志。
 10. **扫码设计（规划）**：输入框 Enter 提交即触发查询（与扫码枪行为一致），接口 `GET /api/v1/orders/by-no/{orderNo}`；未来接摄像头扫码仅替换输入源，接口不变。
 
@@ -328,6 +328,7 @@ erDiagram
 7.6 移动端不做独立仓库版应用，同一应用内切换，减少维护成本；扫码以输入框回车模拟，接口与真实扫码器兼容。
 7.7 员工管理基于现有 `sys_user` 体系扩展，停用即不可登录，不做复杂 RBAC 界面（第一阶段角色固定 4 类）。
 7.8 AI 助手默认不启用外部大模型 Key，先以可插拔 Provider 接口 + 内置规则引擎实现演示效果，接入真实 LLM 只改 Provider。
+7.9 **统一异常 JSON（阶段 2 补齐）**：所有 MVC 层异常（404/405/参数校验失败/JSON 解析失败/兜底 500）都在 `GlobalExceptionHandler` 转成统一 `ApiResponse` JSON；`@PreAuthorize` 的 `AccessDeniedException` 放行给 Spring Security 转 403。避免异常转发到 `/error` 后被安全链拦截成裸 401（前端会误判为登录过期并踢回登录页）。
 
 ---
 
@@ -343,7 +344,7 @@ erDiagram
 | **M6 移动端仓库模式** | WarehouseShell 四 Tab、待处理/发货大按钮、扫码输入框、库存预警 | 手机宽度断点（DevTools 模拟 + 真机）走通「扫单→发货→出库」 |
 | **M7 管理后台** | 员工/角色管理、客户管理、库存盘点、商品编辑完善 | 管理员建员工→分配角色→新账号登录验证 |
 | **M8 收尾** | PWA 图标/安装验证、空态/错误/加载态巡检、Docker 全链路冒烟、README 设计决策补全、测试补齐 | `docker compose up --build` 全流程演示脚本跑通；Lighthouse PWA 基础检查 |
-| 阶段 2 | AI 运营助手（Provider 可插拔 + 只读工具 + 二次确认） | 示例问答 + 调整操作落日志 |
+| 阶段 2 ✅ | AI 运营助手（Provider 可插拔 + 只读工具 + 二次确认） | `verify-assistant.ps1` 13 项（意图问答、建议→入库→流水、403、400/404 异常回归） |
 
 **每个里程碑完成后的交付说明**：改了哪些文件 / 如何本地启动 / 如何验证 / 下一步建议。
 
@@ -351,7 +352,7 @@ erDiagram
 
 ## 9. 环境准备与本地启动
 
-现状：Node 24 可用（前端就绪）；**JDK 21 与 Maven 未安装**（后端从未编译过）；Docker 本会话需授权。
+现状：Node 24 可用（前端就绪）；本机未全局安装 JDK/Maven，但仓库内置便携工具链 `.tools/jdk`（21.0.12）与 `.tools/maven`（3.9.11）已跑通 `mvn test`；Docker 本会话需授权。
 
 启动方式二选一（二选一即可，M5 起后端必须可运行）：
 

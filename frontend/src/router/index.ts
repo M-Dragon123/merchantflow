@@ -11,6 +11,7 @@ import OrderView from '@/views/OrderView.vue'
 import StocktakeView from '@/views/StocktakeView.vue'
 import CustomersView from '@/views/CustomersView.vue'
 import UsersView from '@/views/UsersView.vue'
+import AssistantView from '@/views/AssistantView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import WarehouseTodoView from '@/views/warehouse/WarehouseTodoView.vue'
 import WarehouseOrderView from '@/views/warehouse/WarehouseOrderView.vue'
@@ -63,6 +64,12 @@ const router = createRouter({
           name: 'users',
           component: UsersView,
           meta: { title: '员工管理', roles: ['ADMIN'] },
+        },
+        {
+          path: 'assistant',
+          name: 'assistant',
+          component: AssistantView,
+          meta: { title: 'AI 运营助手', roles: ['ADMIN', 'OPERATOR'] },
         },
       ],
     },

@@ -89,6 +89,9 @@ powershell -ExecutionPolicy Bypass -File .\scripts\verify-m7.ps1
 # 默认连 http://localhost:8080（本地后端）；连 Docker 栈时指定前端入口：
 powershell -ExecutionPolicy Bypass -File .\scripts\verify-m5.ps1 -BaseUrl http://localhost:5173
 powershell -ExecutionPolicy Bypass -File .\scripts\verify-m7.ps1 -BaseUrl http://localhost:5173
+
+# 阶段 2 AI 助手冒烟（管理员登录 → 补货问答 → 建议卡片 → 二次确认入库）
+powershell -ExecutionPolicy Bypass -File .\scripts\verify-assistant.ps1
 ```
 
 脚本要点：UTF-8 安全（中文请求体正确发送）、`Check` 脚本块内变量用 `$script:` 前缀共享，已在脚本内注释说明。

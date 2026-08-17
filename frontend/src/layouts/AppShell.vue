@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import {
   Box,
+  ChatDotRound,
   DataAnalysis,
   DocumentChecked,
   Goods,
@@ -29,6 +30,7 @@ const menus = [
   { to: '/stocktakes', label: '库存盘点', icon: DocumentChecked, roles: ['ADMIN', 'WAREHOUSE'] },
   { to: '/customers', label: '客户管理', icon: User, roles: ['ADMIN', 'OPERATOR'] },
   { to: '/users', label: '员工管理', icon: UserFilled, roles: ['ADMIN'] },
+  { to: '/assistant', label: 'AI 助手', icon: ChatDotRound, roles: ['ADMIN', 'OPERATOR'] },
   { to: '/m', label: '仓库模式', icon: Monitor },
 ]
 const visibleMenus = computed(() =>

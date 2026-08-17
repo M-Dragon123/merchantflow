@@ -1,6 +1,9 @@
 spring:
   application:
     name: merchantflow-api
+  mvc:
+    # 无匹配 handler 时抛 NoHandlerFoundException，由 GlobalExceptionHandler 统一转 404 JSON
+    throw-exception-if-no-handler-found: true
   datasource:
     url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:merchantflow}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: ${DB_USERNAME:merchantflow}
@@ -19,3 +22,7 @@ springdoc:
 merchantflow:
   security:
     jwt-secret: ${JWT_SECRET:replace-with-a-32-character-minimum-development-secret}
+  assistant:
+    # 助手应答 Provider：rule-based（默认，内置规则引擎，零外部依赖）
+    # 接入真实大模型时新增 AssistantProvider 实现，并改为 provider=llm 切换
+    provider: ${ASSISTANT_PROVIDER:rule-based}
