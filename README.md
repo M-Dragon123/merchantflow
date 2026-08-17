@@ -22,48 +22,40 @@ AI 运营助手提出补货建议，用户确认后走标准入库流程
 
 项目内置 4 类演示角色、演示商品、客户和近 30 天历史订单。启动后即可体验工作台趋势、热销排行、待发货、库存预警和订单全流程。
 
-## 真实页面截图
+## 核心业务闭环
 
-以下截图均来自仓库内置演示数据的本地运行环境；点击图片可查看原图。
+> 基于内置演示数据，覆盖「经营判断 → 库存控制 → 仓库履约」；点击图片可查看原图。
 
-### 工作台 · 经营概览
+### 01 · 经营判断
+
+**工作台汇总销售趋势、热销 SKU、待发货任务和异常订单，帮助商家快速判断当天的经营状态。**
 
 <a href="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/dashboard.png">
   <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/dashboard.png" alt="MerchantFlow 工作台：销售趋势、热销排行与异常订单提醒" width="100%" />
 </a>
 
-<sub>销售趋势、热销 Top10、异常订单提醒与待发货概览。</sub>
+### 02 · 库存控制
 
-### 库存中心 · 预警与可追溯流水
+**库存快照、安全库存预警与变更流水形成闭环，让每一次库存调整都有据可查。**
 
 <a href="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/inventory.png">
-  <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/inventory.png" alt="MerchantFlow 库存中心：快照、预警与可追溯流水" width="100%" />
+  <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/inventory.png" alt="MerchantFlow 库存中心：快照、预警与可追溯流水" width="100%" loading="lazy" />
 </a>
 
-<sub>库存快照、安全库存预警与变更流水，便于追溯每一次库存调整。</sub>
+### 03 · 仓库履约（移动端）
 
-### AI 运营助手 · 受控业务查询
-
-<a href="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/ai-assistant.png">
-  <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/ai-assistant.png" alt="MerchantFlow AI 运营助手：只读查询与补货建议边界" width="100%" />
-</a>
-
-<sub>运营问题路由至只读业务查询；涉及库存变更时，仍须在标准业务流程中确认。</sub>
-
-### 手机仓库模式 · 待处理与订单详情
+**仓库人员可在手机端查单、核对商品、执行发货，并查看完整操作记录，无需维护第二套应用。**
 
 <p align="center">
   <a href="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/warehouse-mobile.png">
-    <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/warehouse-mobile.png" alt="MerchantFlow 手机仓库待处理页" width="42%" />
+    <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/warehouse-mobile.png" alt="MerchantFlow 手机仓库待处理页" width="44%" loading="lazy" />
   </a>
   <a href="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/orders-mobile-detail.png">
-    <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/orders-mobile-detail.png" alt="MerchantFlow 手机订单详情与操作记录" width="42%" />
+    <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/orders-mobile-detail.png" alt="MerchantFlow 手机订单详情与操作记录" width="44%" loading="lazy" />
   </a>
 </p>
 
-<p align="center"><sub>扫码 / 手输查单、待发货处理、订单详情与操作记录。</sub></p>
-
-## 页面与功能展示
+## 完整功能清单
 
 | 页面 / 路由 | 可以看到什么 | 对应业务价值 |
 | --- | --- | --- |
