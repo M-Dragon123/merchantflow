@@ -50,7 +50,7 @@ sudo systemctl enable --now docker
 sudo usermod -aG docker $USER && newgrp docker
 
 # ② 获取项目代码（任选其一）
-git clone <你的仓库地址> merchantflow && cd merchantflow
+git clone https://github.com/M-Dragon123/merchantflow.git merchantflow && cd merchantflow
 # 或从本机打包上传：
 # tar czf merchantflow.tgz --exclude='.tools' --exclude='frontend/node_modules' --exclude='frontend/dist' --exclude='backend/target' .
 # scp merchantflow.tgz user@server:/opt/ && ssh user@server 'cd /opt && tar xzf merchantflow.tgz'
@@ -83,7 +83,7 @@ sudo ufw allow 5173/tcp      # 或 cloud 安全组放行
 # （Mac 没有 WSL 问题；Apple 芯片无需任何额外处理，本项目全部镜像都支持 arm64）
 
 # ② 获取项目代码（任选其一）
-git clone <你的仓库地址> merchantflow && cd merchantflow
+git clone https://github.com/M-Dragon123/merchantflow.git merchantflow && cd merchantflow
 # 或从 Windows 本机打包后 AirDrop/网盘/SSH 传过去：
 # Windows 打包：tar czf merchantflow.tgz --exclude='.tools' --exclude='frontend/node_modules' --exclude='frontend/dist' --exclude='backend/target' .
 # Mac 解压：tar xzf merchantflow.tgz
