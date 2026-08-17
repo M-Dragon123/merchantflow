@@ -29,29 +29,29 @@ AI 运营助手提出补货建议，用户确认后走标准入库流程
 <table>
   <tr>
     <td width="50%" align="center">
-      <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/dashboard.png" alt="MerchantFlow 工作台" /><br />
+      <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/dashboard.png" alt="MerchantFlow 工作台" /><br />
       <sub>工作台：趋势、热销排行与异常订单提醒</sub>
     </td>
     <td width="50%" align="center">
-      <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/inventory.png" alt="MerchantFlow 库存中心" /><br />
+      <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/inventory.png" alt="MerchantFlow 库存中心" /><br />
       <sub>库存中心：快照、预警与可追溯流水</sub>
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
-      <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/products.png" alt="MerchantFlow 商品与 SKU" /><br />
+      <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/products.png" alt="MerchantFlow 商品与 SKU" /><br />
       <sub>商品与 SKU：售价、成本、安全库存与上下架</sub>
     </td>
     <td width="50%" align="center">
-      <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/ai-assistant.png" alt="MerchantFlow AI 运营助手" /><br />
+      <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/ai-assistant.png" alt="MerchantFlow AI 运营助手" /><br />
       <sub>AI 运营助手：只读查询与补货建议边界</sub>
     </td>
   </tr>
 </table>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/warehouse-mobile.png" alt="MerchantFlow 手机仓库待处理页" width="28%" />
-  <img src="https://raw.githubusercontent.com/M-Dragon123/merchantflow/main/docs/images/orders-mobile-detail.png" alt="MerchantFlow 手机订单详情与操作记录" width="28%" />
+  <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/warehouse-mobile.png" alt="MerchantFlow 手机仓库待处理页" width="28%" />
+  <img src="https://github.com/M-Dragon123/merchantflow/raw/refs/heads/main/docs/images/orders-mobile-detail.png" alt="MerchantFlow 手机订单详情与操作记录" width="28%" />
 </p>
 
 <p align="center"><sub>手机仓库模式：扫码 / 手输查单、待发货处理、订单详情与操作记录</sub></p>
